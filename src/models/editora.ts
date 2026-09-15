@@ -1,4 +1,5 @@
 import {
+  BaseEntity,
   Column,
   CreateDateColumn,
   Entity,
@@ -7,7 +8,7 @@ import {
 } from 'typeorm';
 
 @Entity('editoras')
-export class Editora {
+export class Editora extends BaseEntity {
   @PrimaryGeneratedColumn()
   id!: number;
 
@@ -25,4 +26,11 @@ export class Editora {
 
   @UpdateDateColumn()
   updated_at!: Date;
+
+  // aceita `new Editora({ nome, cidade, email })`; sem argumento (o TypeORM chama
+  // `new Editora()` internamente) não quebra.
+  constructor(dados?: Partial<Editora>) {
+    super();
+    if (dados) Object.assign(this, dados);
+  }
 }
