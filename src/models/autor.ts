@@ -11,10 +11,10 @@ export class Autor {
   @PrimaryGeneratedColumn()
   id!: number;
 
-  @Column()
+  @Column('varchar')
   nome!: string;
 
-  @Column()
+  @Column('varchar')
   nacionalidade!: string;
 
   @CreateDateColumn()
