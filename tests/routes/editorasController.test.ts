@@ -48,8 +48,8 @@ describe('Rotas de editora', () => {
         );
     })
     
-    test('PUT /editoras/18 atualiza e retorna 200', async () => {
-        const res = await request(app).put('/editoras/18')
+    test('PUT /editoras/1 atualiza e retorna 200', async () => {
+        const res = await request(app).put('/editoras/1')
         .send(
             {
                 cidade: 'Rio de Janeiro'
@@ -61,8 +61,16 @@ describe('Rotas de editora', () => {
     })
     
     
-    test('DELETE /editoras/18 retorna 204', async () => {
-        const res = await request(app).delete('/editoras/18');
+    test('DELETE /editoras/1 retorna 204', async () => {
+        const res = await request(app).delete('/editoras/1');
         expect(res.status).toBe(204);
+    })
+    
+    test('POST com body vazio NÃO cria/salva e retorna status 400', async () => {
+        const res = await request(app).post('/editoras')
+        .send(
+            {}
+        );
+        expect(res.status).toBe(400);
     })
 })
