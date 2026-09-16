@@ -27,6 +27,7 @@ export async function criarEditora(req: Request, res: Response): Promise<void> {
         error: 'Campos obrigatórios ausentes'
       }
     );
+    return;
   }
 
   const editora = editoras().create(dados);
