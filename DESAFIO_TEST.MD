@@ -41,26 +41,34 @@ afterAll(fecharBanco);
 
 describe('Rotas de autor', () => {
 
-  test('GET /autores → 200 e 3 autores'); #'GET /autor retorna sattus 200
+#'GET /autor retorna sattus 200
+  test('GET /autores → 200 e 3 autores'); 
 
-  it.todo('GET /autores/1 → 200 e nome JRR Tolkien'); # 'GET /autor retorna 1 devolve status 200 e nome correto
+# 'GET /autor retorna 1 devolve status 200 e nome correto
+  it.todo('GET /autores/1 → 200 e nome JRR Tolkien'); 
 
-  it.todo('GET /autores/999 → 404'); # GET /autores/999 retorna estatus 404
+# GET /autores/999 retorna estatus 404
+  it.todo('GET /autores/999 → 404'); 
 
-  it.todo('POST /autores válido → 201 com id'); #POST /autores válido retorna 201 com id
+ #POST /autores com dados válidos deve retornar 201 e incluir id
+  it.todo('POST /autores válido → 201 com id');
 
+# POST /autores com body vazio deve retornar 400 Bad Request
   it.todo('POST /autores com body vazio → 400');
 
+# PUT /autores/1 retorna 200 com nova nacionalidade
   it.todo('PUT /autores/1 → 200 com nova nacionalidade');
 
+# PUT /autores com id 999 inexistente deve retornar 404 Not Found
   it.todo('PUT /autores/999 → 404');
 
+# DELETE /autores com id=3 deve retornar 204 No Content e remover o autor
   it.todo('DELETE /autores/3 → 204');
 
   it.todo('DELETE /autores/999 → 404');
-
+# # GET /autores/1/livros deve retornar lista com 2 livros do autor id=1
   it.todo('GET /autores/1/livros → 2 livros');
-
+#GET /autores/3/livros deve retornar lista com 1 livrro do autor id:3
   it.todo('GET /autores/3/livros → 1 livro');
 
 });

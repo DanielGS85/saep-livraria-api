@@ -48,5 +48,13 @@ describe('Testando model editora', () => {
         expect(editora.affected).toBe(1);
     });
 
-    test.todo('Deve fazer uma chamada simulada ao db');
+//     test('Deve fazer uma chamada simulada ao db', async () => {
+//         const mockDb = { query: jest.fn().mockResolvedValue([{ id: 1, nome: 'Autor teste' }]) 
+//     };
+//         const resultado = await mockDb.query('SELECT * FROM autores');
+      
+//         expect(mockDb.query).toHaveBeenCalledWith('SELECT * FROM autores');
+//         expect(resultado).toEqual([{ id: 1, nome: 'Autor teste' }]);
+//       });
+// 
 })
