@@ -44,5 +44,9 @@ jobs:
 
       - run: npm ci
 
+      # Confere que o TypeScript compila e gera o dist/ (o que o deploy roda).
+      # Pega erro de build antes de chegar no Render/Vercel.
+      - run: npm run build
+
       # synchronize:true cria o schema; os testes semeiam sozinhos (beforeEach).
       - run: npm test
