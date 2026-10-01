@@ -1,17 +1,19 @@
-import 'reflect-metadata';
 import 'dotenv/config';
-import { AppDataSource } from '../src/db/dataSource';
-import { limpar, semear } from '../src/db/seed';
+import { criarSchema, limpar, semear } from '../db/seed';
+import { fecharDb } from '../lib/db';
 
-async function reset(): Promise<void> {
-  await AppDataSource.initialize(); // synchronize cria/atualiza as tabelas
+// Roda com: npm run db:reset  (tsx scripts/reset-db.ts)
+// Usa a DATABASE_URL do ambiente (.env local, ou a do Render/Supabase se você
+// exportar antes). Cria o schema, zera e semeia.
+async function main(): Promise<void> {
+  await criarSchema();
   await limpar();
   await semear();
-  console.log('Banco resetado (schema via synchronize + seed).');
-  await AppDataSource.destroy();
+  console.log('Banco resetado (schema + seed).');
+  await fecharDb();
 }
 
-reset().catch((erro: unknown) => {
-  console.error(erro);
+main().catch((erro: unknown) => {
+  console.error('Falha no db:reset:', erro);
   process.exit(1);
 });

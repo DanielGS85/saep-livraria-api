@@ -1,16 +1,16 @@
 name: CI
 
 # Roda em todo push e em todo Pull Request.
-# É o "on: pull_request" que faz o CI virar a status check exigida pelo portão
-# (branch protection): sem ele, não dá pra bloquear o merge quando o teste falha.
+# O "on: pull_request" é o que faz o CI virar a status check exigida pelo portão
+# (branch protection): sem ele, não dá pra bloquear o merge quando algo falha.
 on: [push, pull_request]
 
 jobs:
   testes:
     runs-on: ubuntu-latest
 
-    # Um Postgres de verdade, isolado, subido num CONTAINER só pra este job.
-    # O GitHub cria e joga fora sozinho — os testes batem nele, não em banco compartilhado.
+    # Um Postgres de verdade, num container só pra este job. O GitHub cria e
+    # joga fora sozinho — os testes batem nele, não em banco compartilhado.
     services:
       postgres:
         image: postgres:16
@@ -26,13 +26,9 @@ jobs:
           --health-timeout 5s
           --health-retries 5
 
-    # A API lê estas variáveis (src/db/dataSource.ts). Apontam pro Postgres do serviço.
+    # A app e os testes leem DATABASE_URL (lib/db.ts). Aponta pro Postgres do serviço.
     env:
-      DB_HOST: localhost
-      DB_PORT: 5432
-      DB_USER: postgres
-      DB_PASSWORD: postgres
-      DB_NAME: livraria
+      DATABASE_URL: postgresql://postgres:postgres@localhost:5432/livraria
 
     steps:
       - uses: actions/checkout@v4
@@ -44,9 +40,8 @@ jobs:
 
       - run: npm ci
 
-      # Confere que o TypeScript compila e gera o dist/ (o que o deploy roda).
-      # Pega erro de build antes de chegar no Render/Vercel.
+      # Confere que o Next compila (type-check + build) — o que o deploy roda.
       - run: npm run build
 
-      # synchronize:true cria o schema; os testes semeiam sozinhos (beforeEach).
+      # Os testes criam o schema e semeiam sozinhos (beforeEach -> resetarBanco).
       - run: npm test

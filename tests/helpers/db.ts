@@ -1,18 +1,14 @@
-import { AppDataSource } from '../../src/db/dataSource';
-import { limpar, semear } from '../../src/db/seed';
+import { criarSchema, limpar, semear } from '@/db/seed';
+import { fecharDb } from '@/lib/db';
 
-/** Garante o banco conectado, zera as tabelas e recoloca a semente. Use no beforeEach. */
+/** Garante o schema, zera e recoloca a semente. Use no beforeEach. */
 export async function resetarBanco(): Promise<void> {
-  if (!AppDataSource.isInitialized) {
-    await AppDataSource.initialize();
-  }
+  await criarSchema();
   await limpar();
   await semear();
 }
 
 /** Fecha a conexão pro Jest encerrar sem "open handles". Use no afterAll. */
 export async function fecharBanco(): Promise<void> {
-  if (AppDataSource.isInitialized) {
-    await AppDataSource.destroy();
-  }
+  await fecharDb();
 }

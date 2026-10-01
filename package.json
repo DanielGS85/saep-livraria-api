@@ -1,46 +1,45 @@
 {
   "name": "saep-livraria-api",
-  "version": "1.0.0",
-  "description": "API REST Livraria (TS + Express + knex + Postgres) — base de exercício de testes (UC Teste de Sistemas / SAEP)",
+  "version": "2.0.0",
+  "description": "API REST Livraria — Next.js (App Router) + Postgres (SQL cru). Base de exercício de testes e deploy (UC Teste de Sistemas / Implantação / SAEP).",
+  "private": true,
   "license": "MIT",
   "scripts": {
-    "dev": "tsx watch src/server.ts",
-    "build": "tsc",
-    "start": "node dist/server.js",
-    "test": "jest --runInBand --passWithNoTests",
-    "test:watch": "jest --watch --runInBand --passWithNoTests",
-    "test:cov": "jest --coverage --runInBand --passWithNoTests",
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
     "lint": "eslint .",
     "lint:fix": "eslint . --fix",
+    "test": "jest --runInBand",
+    "test:watch": "jest --watch --runInBand",
+    "test:cov": "jest --coverage --runInBand",
     "db:reset": "tsx scripts/reset-db.ts",
     "prepare": "husky"
   },
   "lint-staged": {
-    "*.ts": "eslint --fix"
+    "*.{ts,tsx}": "eslint --fix"
   },
   "dependencies": {
-    "dotenv": "^17.4.2",
-    "express": "^5.2.1",
-    "pg": "^8.23.0",
-    "reflect-metadata": "^0.2.2",
-    "typeorm": "^1.1.1"
+    "next": "^16.0.0",
+    "postgres": "^3.4.5",
+    "react": "^19.0.0",
+    "react-dom": "^19.0.0"
   },
   "devDependencies": {
     "@commitlint/cli": "^21.2.2",
     "@commitlint/config-conventional": "^21.2.2",
-    "@eslint/js": "^10.0.1",
-    "@types/express": "^5.0.6",
+    "@eslint/eslintrc": "^3.2.0",
     "@types/jest": "^30.0.0",
-    "@types/node": "^26.4.1",
-    "@types/supertest": "^7.2.1",
-    "eslint": "^10.9.1",
+    "@types/node": "^24.0.0",
+    "@types/react": "^19.0.0",
+    "@types/react-dom": "^19.0.0",
+    "dotenv": "^17.4.2",
+    "eslint": "^9.0.0",
+    "eslint-config-next": "^16.0.0",
     "husky": "^9.1.7",
     "jest": "^30.5.1",
     "lint-staged": "^17.4.1",
-    "supertest": "^7.2.2",
-    "ts-jest": "^29.4.12",
     "tsx": "^4.23.13",
-    "typescript": "^6.0.3",
-    "typescript-eslint": "^8.69.0"
+    "typescript": "^5.9.0"
   }
 }
